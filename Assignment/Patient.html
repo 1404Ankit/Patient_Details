@@ -1,0 +1,232 @@
+<html>
+
+<head>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+			<style>
+			body{ 
+				height: 680px;
+				margin: 20px;
+				padding: 10px;
+				border: 2px solid #033371;
+				border-radius: 15px;
+				-moz-border-radius: 15px;
+				-webkit-border-radius: 15px;
+				}
+			
+			p{ 
+				display: table-row;
+			 }
+			
+			label{
+				margin-right: 40px;
+				display: table-cell;
+				width: 120px;
+				}
+			
+			select{
+					width: 250px;
+					height: 30px;
+					padding-left: 10px;
+				  }	
+        		
+				
+			input{
+				width: 250px;
+				height: 30px;
+				padding-left: 10px;
+				margin-bottom: 5px;
+				display: table-cell;
+				padding:5px;
+				border:1px solid #999;
+				border-radius:4px;
+				-moz-border-radius:4px;
+				-web-kit-border-radius:4px;
+				-khtml-border-radius:4px;
+            	}
+			
+			button{ 
+				style: center;
+				background-color: #bde2f9;
+				font-weight: 600;
+				}
+			
+			
+			table, th { 
+					border: 1px solid black;
+					}
+					
+					td{
+					font-weight:heavy;
+					width:160px; 
+					color:red;
+					text-align: center;
+					}
+		</style>
+		
+</head>
+<title>Patient Form</title>
+	<body onload="init()">
+		<form name="firstform" id="firstform" method="post">
+				
+					<p id="p1">
+						<label>First Name</label><input type="text" name="fname" id="fname" size="35" value="" />
+					</p><br>
+					
+					<p id="p2">
+						<label>Last Name</label><input type="text" name="lname" id="lname" size="35" value="" />
+					</p><br>
+					
+					<p id="p3">
+						<label>Age</label><input type="number" name="age" id="age" size="35" value="" />
+					</p><br>
+					
+					<p id="p4">
+						<label>Date of Birth</label><input type="text" name="date" id="datepicker" size="35" value="" />
+					</p><br>
+					
+					<p id="p5">
+						<label>Gender</label>
+							<select id="mylist" onchange="gender()">
+								<option>Select your Gender</option>
+								<option>Male</option>
+								<option>Female</option>
+								<option>Not in List</option>
+							</select>
+					</p><br>
+					
+					<p id="p6">
+						<label>Phone Number</label><input type="Number" name="phone" id="phone" size="35" value="" />
+					</p><br>
+					
+					<button type="button" onclick="onSubmitButton();">Submit</button>
+				</form>
+			</div>
+			
+		<div id="pdada">
+			<table border="1">
+				<tr>
+					<th>FIRST NAME</td>
+					<th>LAST NAME</td>
+					<th>AGE</th>
+					<th>DATE OF BIRTH</td>
+					<th>GENDER</td>
+					<th>PHONE NUMBER</td>
+				</tr>
+				<tr>
+					<td id="first_name"></td>
+					<td id="last_name"></td>
+					<td id="ag_e"></td>
+					<td id="do_b"></td>
+					<td id="sex_gender"></td>
+					<td id="phn_no"></td>
+				</tr>
+			</table>
+			</div>
+			
+			
+		<script>
+		
+		
+		$(document).ready(function()
+		{
+			$(function()
+			{
+				$( "#datepicker" ).datepicker();
+				$( "#format" ).change(function()
+				{
+					$( "#datepicker" ).datepicker( "option", "dateFormat", $(this).val() );
+				});
+			});
+		});
+$( "#datepicker" ).datepicker({
+	inline: true
+});
+		
+		
+		function init()
+		{
+			if (localStorage.fn){
+				document.getElementById("fname").value = localStorage.fname;
+			}
+		}
+
+			function onSubmitButton(){
+					
+					var fn = document.getElementById("fname").value;
+					var ln = document.getElementById("lname").value;
+					var ag = document.getElementById("age").value;
+					var db = document.getElementById("datepicker").value;
+					var gn = document.getElementById("mylist").value;
+					var pn = document.getElementById("phone").value;
+					
+					
+					
+					if(fn === ""){
+						alert("Please fill out the First Name field.");
+						document.getElementById("p1").style.color = "red";
+						document.getElementById("p1").style.fontFamily = "Arial";
+						document.getElementById("p1").style.fontSize = "larger"; 
+						}
+						
+						else if(ln === ""){
+						alert("Please fill out the Last Name field.");
+						document.getElementById("p2").style.color = "red";
+						document.getElementById("p2").style.fontFamily = "Arial";
+						document.getElementById("p2").style.fontSize = "larger";
+						}
+						
+						else if(ag === ""){
+						alert("Please fill out the Age field.");
+						document.getElementById("p3").style.color = "red";
+						document.getElementById("p3").style.fontFamily = "Arial";
+						document.getElementById("p3").style.fontSize = "larger";
+						}
+						
+						else if(ag === ""){
+						alert("Please fill out the Age field.");
+						document.getElementById("p4").style.color = "red";
+						document.getElementById("p4").style.fontFamily = "Arial";
+						document.getElementById("p4").style.fontSize = "larger";
+						}
+						
+						else if(db === ""){
+						alert("Please fill out the Date field.");
+						document.getElementById("p4").style.color = "red";
+						document.getElementById("p4").style.fontFamily = "Arial";
+						document.getElementById("p4").style.fontSize = "larger";
+						}
+						
+						else if(gn === ""){
+						alert("Please fill out the Gender field.");
+						document.getElementById("p5").style.color = "red";
+						document.getElementById("p5").style.fontFamily = "Arial";
+						document.getElementById("p5").style.fontSize = "larger";
+						}
+						
+						else if(gn === ""){
+						alert("Please fill out the Phone field.");
+						document.getElementById("p5").style.color = "red";
+						document.getElementById("p5").style.fontFamily = "Arial";
+						document.getElementById("p5").style.fontSize = "larger";
+						}
+						
+						
+											
+						else{
+						document.getElementById("first_name").innerHTML = fn;
+						document.getElementById("last_name").innerHTML = ln;
+						document.getElementById("ag_e").innerHTML = ag;
+						document.getElementById("do_b").innerHTML = db;
+						document.getElementById("sex_gender").innerHTML = gn;
+						document.getElementById("phn_no").innerHTML = pn;
+												
+						}
+					}
+		</script>				
+			
+			
+	</body>		
+</html>					

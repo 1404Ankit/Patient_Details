@@ -1,0 +1,133 @@
+<html>
+<head>
+	<link href="mystyle.css" rel="stylesheet"/>
+	
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	
+        <script>
+             var studentsArray = [];
+            var selectedIndex = -1;
+            function init() {
+                document.getElementById("tablerows").innerHTML = "";
+                if (localStorage.studentsRecord) {
+                    studentsArray = JSON.parse(localStorage.studentsRecord);
+                    for (var i = 0; i < studentsArray.length; i++) {
+                        prepareTableCell(i, studentsArray[i].firstname, studentsArray[i].lastname, studentsArray[i].age, studentsArray[i].dob, studentsArray[i].gender, studentsArray[i].phn);
+                    }
+                }
+            }
+            function onRegisterPressed() {
+                var firstName = document.getElementById("firstname").value;
+                var lastName = document.getElementById("lastname").value;
+                var patAge = document.getElementById("age").value;
+                var patDob = document.getElementById("dob").value;
+				var patGender = document.getElementById("gender").value;
+				var patPhn = document.getElementById("phn_num").value;
+				
+                var stuObj = {firstname: firstName, lastname: lastName, age: aGe, dob: dOb, gender: gEnder, phn: pHn};
+               
+			   if (selectedIndex === -1) {
+                    studentsArray.push(stuObj);
+                } else {
+                    studentsArray.splice(selectedIndex, 1, stuObj);
+                }
+                localStorage.studentsRecord = JSON.stringify(studentsArray);
+                init();
+                onClarPressed();
+            }
+            function prepareTableCell(index, firstName, lastName, patAge, patDob, patGender, patPhn, subject) {
+                var table = document.getElementById("tablerows");
+                var row = table.insertRow();
+				
+                var firstNameCell = row.insertCell(0);
+                var lastNameCell = row.insertCell(1);
+                var ageCell = row.insertCell(2);
+                var dobCell = row.insertCell(3);
+				var genderCell = row.insertCell(4);
+				var phnCell = row.insertCell(5);
+                var actionCell = row.insertCell(6);
+				
+                firstNameCell.innerHTML = firstName;
+                lastNameCell.innerHTML = lastName;
+                ageCell.innerHTML = patAge;
+				dobCell.innerHTML = patDob;
+				genderCell.innerHTML = patGender;
+				phnCell.innerHTML = patPhn;
+                subjectCell.innerHTML = subject;
+          <!--      actionCell.innerHTML = ‘<button onclick="onEditPressed(’ + index + ‘)">Edit</button><br/><button onclick="deleteTableRow(’ + index + ‘)">Delete</button>'; -->
+            }
+
+            function onClarPressed() {
+                selectedIndex = -1;
+                document.getElementById("firstname").value = "";
+                document.getElementById("lastname").value = "";
+                document.getElementById("rollnum").value = "";
+                document.getElementById("subject").value = "Math";
+                document.getElementById("submit").innerHTML = "Register";
+            }
+     
+			
+	</script>		
+</head>
+<body onload="init()">
+        <div class="container">
+            <header class="headerbar top"><h1>Registration Form</h1></header>
+            <aside class="leftbar">
+                <div>
+                    <fieldset>
+                        <label for="firstname"><span>First Name</span></label>
+                        <input type="text" placeholder="Enter Patient first name" id="firstname">
+                    </fieldset>
+                    <fieldset>
+                        <label for="lastname">Last Name</label>
+                        <input type="text" placeholder="Enter Patient last name" id="lastname">
+                    </fieldset>
+                    <fieldset>
+                        <label for="agenum">Age</label>
+                        <input type="number" placeholder="Enter Patient Age" id="agenum">
+                    </fieldset>
+					<fieldset>
+                        <label for="dob">Date of Birth</label>
+                        <input type="text" placeholder="Enter Patient DOB" id="dob">
+                    </fieldset>
+                    <fieldset>
+                        <label for="gender">Gender</label>
+                        <select id="gender">
+							<option value="Select">Select your Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Felmale</option>
+                        </select>
+                    </fieldset>
+					<fieldset>
+                        <label for="phn">Phone Number</label>
+                        <input type="number" placeholder="Enter Patient Phone Number" id="phn_num">
+                    </fieldset>
+                    <fieldset>
+                        <label for="submit"> </label>
+                        <button id="submit" onclick="onRegisterPressed()">Register</button>
+                        <button id="clear" onclick="onClarPressed()">Clear</button>
+                    </fieldset>
+                </div>
+            </aside>
+            <aside class="rightbar">
+                <table id="regtable">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th>Date of Birth</th>
+                            <th>Gender</th>
+							<th>Phone Number</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablerows">
+                    </tbody>
+                </table>
+            </aside>
+            <footer class="headerbar bottom"></footer>
+        </div>
+    </body>
+</html>
